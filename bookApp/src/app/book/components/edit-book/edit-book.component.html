@@ -1,0 +1,54 @@
+<div class="container" style="padding: 10%;">
+    <form [formGroup]="bookForm" (ngSubmit)="editBook()">
+        <div class="form-group">
+            <label for="BookId">Book Id</label>
+            <input type="text"   class="form-control" id="BookId" formControlName="BookId"  readonly >
+        </div>
+        <div class="form-group">
+            <label for="CId">Category</label>
+            <input type="text"   class="form-control"  formControlName='CId' placeholder="{{book.CId}}"   >
+        </div>
+        <div class="form-group">
+            <label for="Title">Title</label>
+            <input class="form-control" formControlName="Title">
+        </div>
+        <div class="form-group">
+            <label for="Title">Author</label>
+            <input class="form-control" formControlName="Author">
+        </div>
+        <div class="form-group">
+            <label for="Title">ISBN</label>
+            <input class="form-control" formControlName="ISBN">
+        </div>
+        <div class="form-group">
+            <label for="Title">Year of publish</label>
+            <input class="form-control" formControlName="BookYear">
+        </div>
+        <div class="form-group">
+            <label for="Title">Book Rating</label>
+            <input class="form-control" formControlName="BRating">
+        </div>
+        <div class="form-group">
+            <label for="Title">Availability</label>
+            <input class="form-control" formControlName="Quantity">
+        </div>
+        <div class="form-group">
+            <label for="Title">Status</label>
+            <input class="form-control" formControlName="BStatus">
+        </div>
+        <div class="form-group">
+            <label for="Title">Description</label>
+            <input class="form-control" formControlName="BDescri">
+        </div>
+        <div class="form-group">
+            <label for="Title">Condition</label>
+            <input class="form-control" formControlName="BCondition">
+        </div>
+        <div class="form-group">
+            <label for="Title">Tags</label>
+            <input class="form-control" formControlName="BTags">
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid">Save Changes</button>
+    </form>
+
+</div>

@@ -1,0 +1,32 @@
+<!-- <button id="btn" (click)="allBooks()">Get Data</button> -->
+<div class="container">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of books">
+                <td>{{ book.BookId }}</td>
+                <td>{{book.CId}}</td>
+                <td>{{ book.Title }}</td>
+                <td>{{ book.Author }}</td>
+                <td>{{ book.Price }}</td>
+                <td>
+                    <!-- <button class="btn btn-primary" (click)="viewBook(book.BookId)">View</button> -->
+                    <button class="btn btn-warning" routerLink="/book/{{book.BookId}}">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteBook(book.BookId)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <button class="btn btn-warning" routerLink="/add">Add New Book</button>
+
+</div>
