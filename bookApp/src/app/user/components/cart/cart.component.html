@@ -1,13 +1,31 @@
 <p>cart works!</p>
 <table class="table table-striped">
 
-    <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor="let cartItem of cart.CartProducts; let i = index">
+      <td>{{cartItem.Book.Title}}</td>
+      <td>{{cartItem.Book.Author}}</td>
+      <td>
+        <input type="number" [(ngModel)]="cartItem.Quantity" (change)="onChange(i)">
+      </td>
+      <td>{{cartItem.Quantity * cartItem.Book.Price}}</td>
+      <td><button class="btn btn-secondary" (click)="removeBtnClick(cartItem.CPId)">Remove</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><button class="btn btn-primary" (click)="onCheckoutClick()">Checkout Cart</button></td>
+      <td></td>
+    </tr>
+  </tbody>
 
 </table>

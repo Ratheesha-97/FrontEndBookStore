@@ -1,0 +1,19 @@
+<p>order-list works!</p>
+<div class="list-group" *ngFor="let order of orders">
+    <button type="button" class="list-group-item list-group-item-action" disabled>
+        <div class="row">
+            <span class="col-3">Date</span>
+            <span class="col-3">Total Price</span>
+            <span class="col-3">Order Status</span>
+            <span class="col-3">Number of Books</span>
+        </div>
+    </button>
+    <button type="button" class="list-group-item list-group-item-action">
+        <div class="row">
+            <span class="col-3">{{order.OrderDate |  date:'dd MMM yyyy'}}</span>
+            <span class="col-3">₹ {{order.OrderPrice}}</span>
+            <span class="col-3">{{order.OrderStatus}}</span>
+            <span class="col-3">{{totalBooks(order)}}</span>
+        </div>
+    </button>
+  </div>
