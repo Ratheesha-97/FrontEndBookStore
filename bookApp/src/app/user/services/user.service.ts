@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Cart } from '../models/cart.model';
 import { CartItem } from '../models/cart-item.model';
-import { Order } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,13 +53,21 @@ export class UserService {
   }
 
   removeFromCart(id: number): any {
-    console.log("Removing product: " + id);
     return this.http.delete(this.REST_API_URL_BASE + "CartProducts/" + id)
       .pipe(map((res: any) => {
         console.log(res);
         return res;
       }))
-      
+
+  }
+
+  getCoupon(code: string): any {
+    return this.http.get(this.REST_API_URL_BASE + "Coupons/" + code)
+    .pipe(map((res: any) => {
+      console.log(res);
+      return res;
+    }))
+    
   }
 
   getUserDetails(): any {

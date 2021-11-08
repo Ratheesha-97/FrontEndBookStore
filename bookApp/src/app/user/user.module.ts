@@ -5,6 +5,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 
 
@@ -12,7 +13,8 @@ import { OrderListComponent } from './components/order-list/order-list.component
   declarations: [
     CartComponent,
     WishlistComponent,
-    OrderListComponent
+    OrderListComponent,
+    OrderDetailsComponent
   ],
   imports: [
     CommonModule,

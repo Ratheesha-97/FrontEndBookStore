@@ -24,7 +24,11 @@ export class WishlistComponent implements OnInit {
       BookId: book.BookId,
       Quantity: 1,
     }
-    this.userService.addBookToCart(cartProduct);
+    this.userService.addBookToCart(cartProduct)
+      .subscribe((res: any) => {
+        console.log("Book added to cart.");
+        
+      })
   }
   ngOnInit(): void {
     this.wishlistSubscription = this.userService.getUserDetails()

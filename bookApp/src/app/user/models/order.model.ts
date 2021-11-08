@@ -10,7 +10,8 @@ interface IOrder {
     OrderDate: Date,
     OrderStatus: number,
     Coins: number,
-    Coupon: string
+    Coupon: string,
+    Show: boolean
 }
 
 @Injectable({
@@ -26,4 +27,5 @@ export class Order implements IOrder {
     OrderStatus!: number;
     Coins!: number;
     Coupon!: string;
+    Show: boolean = false;
 }
