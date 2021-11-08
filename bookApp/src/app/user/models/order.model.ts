@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Address } from "./address.model";
 import { Cart } from "./cart.model";
 
 interface IOrder {
@@ -11,7 +12,8 @@ interface IOrder {
     OrderStatus: number,
     Coins: number,
     Coupon: string,
-    Show: boolean
+    Show: boolean,
+    Address: Address
 }
 
 @Injectable({
@@ -28,4 +30,5 @@ export class Order implements IOrder {
     Coins!: number;
     Coupon!: string;
     Show: boolean = false;
+    Address!: Address;
 }
