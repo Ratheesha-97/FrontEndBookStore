@@ -31,7 +31,7 @@ style="background-color: rgba(0, 0, 0, 0.05);text-align:center;height:43px;paddi
 					<br>
 					<button href="#" class="btn" style="background-color:orange;" routerLink="/home">WishList</button>
 
-					<button style="margin-left: 50px;" href="#" class="btn btn-primary">Add to Cart</button>
+					<button style="margin-left: 50px;" (click)="addToCartBtn(book.BookId)" class="btn btn-primary">Add to Cart</button>
 					
 					<h6>Price: Rs{{book.Price}}</h6>
 				</div>

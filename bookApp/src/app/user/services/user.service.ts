@@ -88,7 +88,12 @@ export class UserService {
       }))
   }
 
-  addBookToCart(cartProduct: any): any {
+  addBookToCart(bookId: number): any {
+    let cartProduct = {
+      CartId: this.getUserCartId(),
+      BookId: bookId,
+      Quantity: 1,
+    }
     return this.http.post(this.REST_API_URL_BASE + "CartProducts/", cartProduct)
       .pipe(map((res: any) => {
         console.log(res);

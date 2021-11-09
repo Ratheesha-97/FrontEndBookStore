@@ -19,12 +19,7 @@ export class WishlistComponent implements OnInit {
     
     let book = this.wishlist[index].Book;
     console.log("adding book", book.Title);
-    let cartProduct = {
-      CartId: this.userService.getUserCartId(),
-      BookId: book.BookId,
-      Quantity: 1,
-    }
-    this.userService.addBookToCart(cartProduct)
+    this.userService.addBookToCart(book.BookId)
       .subscribe((res: any) => {
         console.log("Book added to cart.");
         

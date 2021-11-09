@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BookService } from 'src/app/shared/services/book.service';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-full-books-display',
@@ -10,7 +11,7 @@ import { BookService } from 'src/app/shared/services/book.service';
 export class FullBooksDisplayComponent implements OnInit {
   bookSubscription:Subscription|undefined=undefined;
   BookData:any[]=[];
-  constructor(private bookServ:BookService) { }
+  constructor(private bookServ:BookService, private userService: UserService) { }
 
   ngOnInit(): void {
 
@@ -19,6 +20,14 @@ export class FullBooksDisplayComponent implements OnInit {
       this.BookData = res;
       console.log(this.BookData);
     });
+  }
+
+
+  addToCartBtn(id: number) {
+    this.userService.addBookToCart(id)
+      .subscribe((res: any) => {
+        
+      })
   }
 
 }
