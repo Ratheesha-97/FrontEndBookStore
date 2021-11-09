@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './components/login/login.component';
-
+import { ViewOrdersComponent } from './view-orders/view-orders.component';
 import { RouterModule, Routes } from '@angular/router';
-import { SigninComponent } from './components/signin/signin.component';
+import { EditOrdersComponent } from './edit-orders/edit-orders.component';
 
 const authRoutes:Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'signin', component: SigninComponent},
+  {path: 'viewOrders', component: ViewOrdersComponent},
+  {path: 'viewOrders/:id', component: EditOrdersComponent},
+  
   
   ]
+
 
 @NgModule({
   declarations: [],
@@ -20,8 +21,5 @@ const authRoutes:Routes = [
   exports:[
     RouterModule
   ]
-
-
-
 })
-export class AuthRoutingModule { }
+export class OrderRoutingModule { }
