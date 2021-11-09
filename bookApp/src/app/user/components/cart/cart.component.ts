@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription, interval as observableInterval } from 'rxjs';
 import { takeWhile, scan, tap } from "rxjs/operators";
 import { Address } from '../../models/address.model';
@@ -28,7 +29,8 @@ export class CartComponent implements OnInit {
 	selectedAddress: number = -1;
 	coupon!: Coupon;
 	cartSubscription: Subscription | undefined = undefined;
-	constructor(private userService: UserService) { }
+
+	constructor(private userService: UserService, private router: Router) { }
 
 	selectAddress(id: number): void {
 		this.selectedAddress = id;
@@ -105,6 +107,8 @@ export class CartComponent implements OnInit {
 	}
 
 	onChange(i: number) {
+		console.log(this.cart.CartProducts[i]);
+		
 		this.cartSubscription = this.userService.updateCartQuantity(this.cart.CartProducts[i])
 			.subscribe((res: any) => {
 			})
@@ -133,9 +137,10 @@ export class CartComponent implements OnInit {
 		}
 		if(this.coupon)
 			order['Coupon'] = this.coupon.CouponId;
-		this.cartSubscription = this.userService.checkoutCart(order)
+		this.userService.checkoutCart(order)
 			.subscribe((res: Order) => {
 				console.log(res);
+				this.router.navigate(['/user/success']);
 			})
 	}
 

@@ -1,21 +1,35 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Address } from '../../models/address.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-address-list',
   templateUrl: './address-list.component.html',
   styleUrls: ['./address-list.component.css']
 })
+
+
 export class AddressListComponent implements OnInit {
 
-  @Input() addresses: Address[] = [];
+  @Input() addresses: Address[] | undefined;
   selectedAddress: number = -1;
 
   @Output() onAddressSelect = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    console.log(this.addresses);
+    if (this.addresses == undefined) {
+      this.updateAddressList();
+    }
+  }
+
+  updateAddressList() {
+    this.userService.getUserDetails()
+      .subscribe((res: any) => {
+        this.addresses = res.Addresses;
+      })
   }
 
   selectAddress(id: number): void {
@@ -26,6 +40,9 @@ export class AddressListComponent implements OnInit {
 
   }
   deleteAddress(id: number): void {
-
+    this.userService.deleteAddress(id)
+      .subscribe((res: any) => {
+        this.updateAddressList();
+      })
   }
 }

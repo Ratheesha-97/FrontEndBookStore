@@ -1,64 +1,66 @@
 <p>cart works!</p>
-<table class="table table-striped">
 
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Total Price</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cartItem of cart.CartProducts; let i = index">
-      <td>{{cartItem.Book.Title}}</td>
-      <td>{{cartItem.Book.Author}}</td>
-      <td>
-        <input type="number" [(ngModel)]="cartItem.Quantity" (change)="onChange(i)">
-      </td>
-      <td>{{cartItem.Quantity * cartItem.Book.Price}}</td>
-      <td><button class="btn btn-secondary" (click)="removeBtnClick(cartItem.CPId)">Remove</button></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td>Total Cart Price</td>
-      <td>₹ {{getCartprice()}}</td>
-      <td></td>
-    </tr>
-  </tbody>
+<div class="container" *ngIf="cart.CartProducts.length>0;else empty">
+  <table class="table table-striped border">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total Price</th>
+        <th></th>
+      </tr>
+    </thead>
 
-</table>
+    <tbody>
+      <tr *ngFor="let cartItem of cart.CartProducts; let i = index">
+        <td>{{cartItem.Book.Title}}</td>
+        <td>{{cartItem.Book.Author}}</td>
+        <td>
+          <input type="number" [(ngModel)]="cartItem.Quantity" (change)="onChange(i)">
+        </td>
+        <td>{{cartItem.Quantity * cartItem.Book.Price}}</td>
+        <td><button class="btn btn-secondary" (click)="removeBtnClick(cartItem.CPId)">Remove</button></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Total Cart Price</td>
+        <td>₹ {{getCartprice()}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
-<label>Coupon</label>
-<input type="text" [(ngModel)]="couponInput">
-<Button (click)="couponBtnClick()">Apply Coupon</Button>
-<p [ngStyle]="couponStyle">{{couponInfo}}</p>
+  <label>Coupon</label>
+  <input type="text" [(ngModel)]="couponInput">
+  <Button (click)="couponBtnClick()">Apply Coupon</Button>
+  <p [ngStyle]="couponStyle">{{couponInfo}}</p>
 
-<br>
-<p>
-  <span>Order Price: </span>
-  <span>₹ {{orderPrice}}</span>
-  <span style="color: green;" *ngIf="discount>0"> ₹ {{discount}} OFF!</span>
-</p>
-<br>
-<br>
+  <br>
+  <p>
+    <span>Order Price: </span>
+    <span><strong>₹ {{orderPrice}}</strong></span>
+    <span style="color: green;" *ngIf="discount>0"> ₹ {{discount}} OFF!</span>
+  </p>
+  <br>
+  <br>
 
-<button class="btn btn-primary" (click)="proceedToCheckout(container)" [disabled]="checkingOut">Proceed to
-  Checkout</button>
+  <button class="btn btn-primary" (click)="proceedToCheckout(container)" [disabled]="checkingOut">Proceed to
+    Checkout</button>
 
-<br>
+  <br>
 
-
-<div #container>
-
-
-  <!-- <div> -->
-  <div *ngIf="checkingOut">
-    <app-address-list (onAddressSelect)="selectAddress($event)" [addresses]="addresses"></app-address-list>
-
-    <br>
-    <button class="btn btn-primary" (click)="onCheckoutClick()">Checkout Cart</button>
+  <div #container>
+    <div *ngIf="checkingOut">
+      <app-address-list (onAddressSelect)="selectAddress($event)" [addresses]="addresses"></app-address-list>
+      <br>
+      <button class="btn btn-primary" (click)="onCheckoutClick()">Checkout Cart</button>
+    </div>
   </div>
 </div>
+
+
+<ng-template #empty>
+  <p>No items in cart.</p>
+</ng-template>

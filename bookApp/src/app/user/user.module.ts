@@ -7,6 +7,8 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { AddressListComponent } from './components/address-list/address-list.component';
+import { AddressCreateComponent } from './components/address-create/address-create.component';
+import { SuccessComponent } from './components/success/success.component';
 
 
 
@@ -16,7 +18,9 @@ import { AddressListComponent } from './components/address-list/address-list.com
     WishlistComponent,
     OrderListComponent,
     OrderDetailsComponent,
-    AddressListComponent
+    AddressListComponent,
+    AddressCreateComponent,
+    SuccessComponent
   ],
   imports: [
     CommonModule,

@@ -18,8 +18,41 @@ export class UserService {
     return 1;
   }
 
-  getUserCartId(): number {
-    return 1;
+  getUserCartId(): string | null {
+    let cartId = sessionStorage.getItem('cartId');
+    if (cartId == null) {
+      this.updateSession();
+      return sessionStorage.getItem('cartId');
+    }
+    return cartId;
+  }
+
+  updateSession(): void {
+    this.http.get(this.REST_API_URL_BASE + "UserInfoes/" + this.getUserId())
+      .subscribe((res: any) => {
+        sessionStorage.setItem('cartId', res.CartId);
+      })
+  }
+
+  createBookSubmission(bookSubmission: any): any {
+    return this.http.post(this.REST_API_URL_BASE + "BookSubmissions/", bookSubmission)
+      .pipe(map((res: any) => {
+        return res;
+      }))
+  }
+
+  createAddress(address: any): any {
+    return this.http.post(this.REST_API_URL_BASE + "Addresses/", address)
+      .pipe(map((res: any) => {
+        return res;
+      }))
+  }
+
+  deleteAddress(id: number): any {
+    return this.http.delete(this.REST_API_URL_BASE + "Addresses/" + id)
+      .pipe(map((res: any) => {
+        return res;
+      }))
   }
 
   getUserCart(): Observable<Cart> {
@@ -63,17 +96,18 @@ export class UserService {
 
   getCoupon(code: string): any {
     return this.http.get(this.REST_API_URL_BASE + "Coupons/" + code)
-    .pipe(map((res: any) => {
-      console.log(res);
-      return res;
-    }))
-    
+      .pipe(map((res: any) => {
+        console.log(res);
+        return res;
+      }))
+
   }
 
   getUserDetails(): any {
     return this.http.get(this.REST_API_URL_BASE + "UserInfoes/" + this.getUserId())
       .pipe(map((res: any) => {
         console.log(res);
+        this.updateSession();
         return res;
       }))
   }
