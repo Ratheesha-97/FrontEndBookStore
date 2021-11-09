@@ -36,15 +36,15 @@ export class CartComponent implements OnInit {
 		this.selectedAddress = id;
 	}
 	editAddress(id: number): void {
-		
+
 	}
 	deleteAddress(id: number): void {
-		
+
 	}
 
 	proceedToCheckout(el: HTMLElement): void {
-		this.checkingOut = !this.checkingOut; 
-		setTimeout(()=> {
+		this.checkingOut = !this.checkingOut;
+		setTimeout(() => {
 			el.scrollIntoView()
 		}, 100);
 	}
@@ -63,7 +63,7 @@ export class CartComponent implements OnInit {
 	}
 
 	couponBtnClick(): void {
-		if (this.couponInput == ""){
+		if (this.couponInput == "") {
 			this.couponStyle = { 'color': "black" };
 			this.couponInfo = "No coupon code entered."
 			return;
@@ -108,7 +108,7 @@ export class CartComponent implements OnInit {
 
 	onChange(i: number) {
 		console.log(this.cart.CartProducts[i]);
-		
+
 		this.cartSubscription = this.userService.updateCartQuantity(this.cart.CartProducts[i])
 			.subscribe((res: any) => {
 			})
@@ -123,7 +123,7 @@ export class CartComponent implements OnInit {
 		return res;
 	}
 
-	
+
 	onCheckoutClick() {
 		console.log(new Date());
 		let order: any = {
@@ -135,8 +135,9 @@ export class CartComponent implements OnInit {
 			AId: this.selectedAddress,
 			// Coins: 0,
 		}
-		if(this.coupon)
+		if (this.coupon)
 			order['Coupon'] = this.coupon.CouponId;
+
 		this.userService.checkoutCart(order)
 			.subscribe((res: Order) => {
 				console.log(res);
@@ -148,7 +149,7 @@ export class CartComponent implements OnInit {
 		this.cartSubscription = this.userService.getUserDetails()
 			.subscribe((res: any) => {
 				console.log(res.Addresses);
-				
+
 				this.cart = res.Cart;
 				this.addresses = res.Addresses;
 				this.orderPrice = this.getCartprice();
