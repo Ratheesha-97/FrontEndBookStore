@@ -5,6 +5,9 @@ import { TestimonialComponent } from './homePage/testimonial/testimonial.compone
 import { FilterByDisplayComponent } from './shared/books/FilterByDisplay/filter-by-display/filter-by-display.component';
 import { FullBooksDisplayComponent } from './shared/books/FullBooksDisplay/full-books-display/full-books-display.component';
 import { CategorydisplayComponent } from './shared/category/categorydisplay/categorydisplay.component';
+import { CouponHomeComponent } from './coupon/components/coupon-home/coupon-home.component';
+import { AdminAuthGuard } from './Shared/guards/adminGuard/admin-auth.guard';
+
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -16,6 +19,28 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'coupon',
+    loadChildren: () => import('./coupon/coupon.module').then(m => m.CouponModule)
+  },
+  {
+    path: 'book',
+    loadChildren: () => import('./book/book.module').then(m => m.BookModule)
+  },
+  {
+    path: 'book-details',
+    loadChildren: () => import('./book-details/book-details.module').then(m => m.BookDetailsModule)
+  },
+  // {path:'coupon1',component:CouponHomeComponent}
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate : [AdminAuthGuard]
   },
 ];
 
