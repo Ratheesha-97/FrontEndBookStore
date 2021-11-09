@@ -1,0 +1,27 @@
+<div class="container-fluid" style="background-color: rgba(0, 0, 0, 0.05);text-align:center;height:43px;padding:10px">
+    <div class="row">
+        <a class="text-decoration-none text-reset fw-bold" style="color: black;" id="happycustomer"
+            aria-label="Happy Customer">Testimonials</a>
+
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row" style="padding-left: 178px;">
+        <div class="card col-11 col-sm-10 col-md-8 col-lg-3 center" *ngFor="let singletest of threeData" style="border: 5px;border-style: solid;border-color: rgb(248, 223, 170);margin: 10px;background-color: rgb(248, 230, 191);">
+
+            <div class="card-body">
+                <img class="card-img-top center" src="/assets/UImages/Books/harrystones.jpg" alt="Card image" style="height:100px;width:100px;border-radius: 50%;margin-left: 55px;">
+
+                <p class="card-text">{{singletest.Review}}</p>
+                <h5 class="card-title">-- {{singletest.UserInfo.FName + " " +singletest.UserInfo.LName}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--form for testimonial-->
