@@ -15,6 +15,9 @@ export class SearchPanelComponent implements OnInit {
 
   toSearchTerm : any;
   res:any;
+
+  userFoundError = false;
+  errorMessage = "";
   
   constructor(private userService : AdminServicesService, private searchPanelService: SearchPanelServiceService) { }
 
@@ -32,22 +35,14 @@ export class SearchPanelComponent implements OnInit {
     
     this.res.subscribe( (userEntireData:any) =>{
         console.log("User found", userEntireData);
+        this.userFoundError = false;
+        this.userEntireData.emit(userEntireData); //contains entire user info inclding their book submission, reviews everything as they are all connected by a foregin key
 
-        this.userEntireData.emit(userEntireData); //contains entire user info
-
-        
-          // this.searchPanelService.getAllDataOfUserById(res.UId, this.controllerName)
-        //   .subscribe( (res:any) => {
-        //     console.log("Table Data found for User -> ", res);
-
-        //     
-        //   },
-        //   (error:string) => {
-        //     console.log("Error in fetching table Data for User");
-        //   })
     },
       (error: any) => {
       console.log("USer Not found Error ->" ,error);
+      this.userFoundError = true;
+      this.errorMessage = "User Does Not Exsist";
 
     })
     
