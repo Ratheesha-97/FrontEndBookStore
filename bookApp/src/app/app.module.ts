@@ -16,6 +16,8 @@ import { TestimonialComponent } from './homePage/testimonial/testimonial.compone
 import { CategorydisplayComponent } from './shared/category/categorydisplay/categorydisplay.component';
 import { FullBooksDisplayComponent } from './shared/books/FullBooksDisplay/full-books-display/full-books-display.component';
 import { FilterByDisplayComponent } from './shared/books/FilterByDisplay/filter-by-display/filter-by-display.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsContainerComponent } from './Shared/toasts/components/toasts-container/toasts-container.component';
 
 @NgModule({
   declarations: [
@@ -29,14 +31,16 @@ import { FilterByDisplayComponent } from './shared/books/FilterByDisplay/filter-
     TestimonialComponent,
     CategorydisplayComponent,
     FullBooksDisplayComponent,
-    FilterByDisplayComponent
+    FilterByDisplayComponent,
+    ToastsContainerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

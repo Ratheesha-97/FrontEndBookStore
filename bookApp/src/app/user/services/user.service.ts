@@ -88,9 +88,19 @@ export class UserService {
       }))
   }
 
+  userNotAuthenticated(): void {
+    console.log("User is not authenticated.");
+    
+  }
+
   addBookToCart(bookId: number): any {
+    let cartId = this.getUserCartId();
+    if (cartId == null) {
+      this.userNotAuthenticated();
+      throw "Not Authenticated.";
+    }
     let cartProduct = {
-      CartId: this.getUserCartId(),
+      CartId: parseInt(cartId),
       BookId: bookId,
       Quantity: 1,
     }

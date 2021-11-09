@@ -10,12 +10,12 @@ import { AdminAuthGuard } from './Shared/guards/adminGuard/admin-auth.guard';
 
 
 const routes: Routes = [
-  {path:'home',component:HomeComponent},
-  {path:'testimonial',component:TestimonialComponent},
-  {path:'categories/:cid',component:CategorydisplayComponent},
-  {path:'Books',component:FullBooksDisplayComponent},
-  {path:'Searchbooks/:Filter/:searchText',component:FilterByDisplayComponent},
-  {path: '',component: HomeComponent},
+  { path: 'home', component: HomeComponent },
+  { path: 'testimonial', component: TestimonialComponent },
+  { path: 'categories/:cid', component: CategorydisplayComponent },
+  { path: 'Books', component: FullBooksDisplayComponent },
+  { path: 'Searchbooks/:Filter/:searchText', component: FilterByDisplayComponent },
+  { path: '', component: HomeComponent },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
@@ -40,7 +40,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-    canActivate : [AdminAuthGuard]
+    canActivate: [AdminAuthGuard]
   },
 ];
 

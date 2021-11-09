@@ -1,14 +1,31 @@
-
 <div class="container-fluid"
-style="background-color: rgba(0, 0, 0, 0.05);text-align:center;height:43px;padding:10px;margin-bottom:43px;margin-top: 0px;">
-<div class="row">
-    <a class="text-decoration-none text-reset fw-bold" style="color: black;" id="categorybooks"
-        aria-label="Category books"> Most Exciting collections of Books for your Reading
-        World!</a>
+	style="background-color: rgba(0, 0, 0, 0.05);text-align:center;height:43px;padding:10px;margin-bottom:43px;margin-top: 0px;">
+	<div class="row">
+		<a class="text-decoration-none text-reset fw-bold" style="color: black;" id="categorybooks"
+			aria-label="Category books"> Most Exciting collections of Books for your Reading
+			World!</a>
 
-</div>
+	</div>
 </div>
 
+<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+	<div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+		<div class="toast-header">
+			<img src="..." class="rounded me-2" alt="...">
+			<strong class="me-auto">Bootstrap</strong>
+			<small>11 mins ago</small>
+			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+		</div>
+		<div class="toast-body">
+			Hello, world! This is a toast message.
+		</div>
+	</div>
+</div>
+<ngb-toast header="Notification header" [delay]="5000" >
+	Content of the notification
+</ngb-toast>
 <!--Card Display of Books-->
 
 <div class="container-fluid">
@@ -21,9 +38,9 @@ style="background-color: rgba(0, 0, 0, 0.05);text-align:center;height:43px;paddi
 				<h5 class="card-title">{{book.Title}}
 					<h6><i>by {{book.Author}}</i></h6>
 				</h5>
-		<!--		<p class="card-text">
+				<!--		<p class="card-text">
 					{{k.BDescri}}
-				</p>	    -->		
+				</p>	    -->
 				<a href="#" style="color:darkorchid;color:rgb(161, 142, 94);" routerLink="/home">Explore the book
 				</a>
 				<br>
@@ -31,13 +48,14 @@ style="background-color: rgba(0, 0, 0, 0.05);text-align:center;height:43px;paddi
 					<br>
 					<button href="#" class="btn" style="background-color:orange;" routerLink="/home">WishList</button>
 
-					<button style="margin-left: 50px;" (click)="addToCartBtn(book.BookId)" class="btn btn-primary">Add to Cart</button>
-					
+					<button style="margin-left: 50px;" (click)="addToCartBtn(book.BookId)" class="btn btn-primary">Add
+						to Cart</button>
+
 					<h6>Price: Rs{{book.Price}}</h6>
 				</div>
 				<br>
-			<!--	<p>Tags : {{k.BTags}}</p>                -->
-				
+				<!--	<p>Tags : {{k.BTags}}</p>                -->
+
 			</div>
 		</div>
 
