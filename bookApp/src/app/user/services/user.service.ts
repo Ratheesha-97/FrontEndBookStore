@@ -14,23 +14,34 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUserId(): number {
-    return 1;
+  getUserId(): string | null {
+    return sessionStorage.getItem("UserId");
   }
 
   getUserCartId(): string | null {
-    let cartId = sessionStorage.getItem('cartId');
+    let cartId = sessionStorage.getItem('CartId');
     if (cartId == null) {
       this.updateSession();
-      return sessionStorage.getItem('cartId');
+      return sessionStorage.getItem('CartId');
     }
     return cartId;
   }
 
+  isAdmin(): boolean {
+    if(sessionStorage.getItem("AdminToken") == null)
+      return false;
+    return true;
+  }
+
   updateSession(): void {
+    
     this.http.get(this.REST_API_URL_BASE + "UserInfoes/" + this.getUserId())
       .subscribe((res: any) => {
-        sessionStorage.setItem('cartId', res.CartId);
+        console.log("Got User Info.");
+        console.log("CartId:", res.CartId);
+        
+        
+        sessionStorage.setItem('CartId', res.CartId);
       })
   }
 

@@ -31,14 +31,16 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem("AdminToken", JSON.stringify(res.body) );
             sessionStorage.removeItem("UserToken");
           }
-          else{
+          else{            
+            sessionStorage.setItem("UserId", res.body.UId);
+            sessionStorage.setItem("CartId", res.body.cartId);
             sessionStorage.setItem("UserToken", JSON.stringify(res.body));
             sessionStorage.removeItem("AdminToken");
           }
           
         },
 
-        error => {
+        (error: any) => {
           console.log("[ERROR]", error);
           this.loginSuccess = false;
           this.failedLogin = true;
