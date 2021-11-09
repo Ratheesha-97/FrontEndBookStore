@@ -1,0 +1,20 @@
+<p>wishlist works!</p>
+<table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let wish of wishlist; let i = index">
+        <td>{{wish.Book.Title}}</td>
+        <td>{{wish.Book.Author}}</td>
+        <td>{{wish.Book.Price}}</td>
+        <td><button class="btn btn-primary" (click)="addBookToCart(i)">Add to Cart</button></td>
+      </tr>
+    </tbody>
+  
+  </table>
