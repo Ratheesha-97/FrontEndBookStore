@@ -9,7 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class AdminServicesService {
 
-  ADMIN_API = "https://localhost:44390/api/admin/";
+  ADMIN_API = "https://localhost:44390/api/UserSearch/";
   USER_API = "https://localhost:44390/api/UserInfoes/";
 
   constructor(private http: HttpClient, ) { }
@@ -21,7 +21,7 @@ export class AdminServicesService {
       "email" : email
     }
 
-    return this.http.post(this.ADMIN_API + "FindUserByUserNameOREmail", reqUser)
+    return this.http.post(this.ADMIN_API, reqUser)
       .pipe(
         catchError( (error:HttpErrorResponse) => {
           console.log("Error in fetching User in Search Panel : Error Resp -> ", error);

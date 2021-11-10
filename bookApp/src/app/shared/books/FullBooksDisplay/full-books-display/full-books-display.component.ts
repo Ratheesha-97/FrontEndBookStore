@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BookService } from 'src/app/shared/services/book.service';
-import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
@@ -36,7 +36,21 @@ export class FullBooksDisplayComponent implements OnInit {
             this.toastService.show("Book already in cart.", { classname: 'bg-danger text-light', delay: 3000 })
           }
         }
+      )
+  }
 
+  addToWishlistBtn(id: number) {
+    this.userService.addBookToWishlist(id)
+      .subscribe(
+        (res: any) => {
+          console.log("Book added to wishlist.");
+          this.toastService.show("Book added to wishlist.", { classname: 'bg-success text-light', delay: 3000 })
+        },
+        (err: any) => {
+          if (err.status == 500) {
+            this.toastService.show("Book already in wishlist.", { classname: 'bg-danger text-light', delay: 3000 })
+          }
+        }
       )
   }
 

@@ -1,10 +1,9 @@
-<p>address-list works!</p>
 <div class="container row mt-3">
 
   <div class="col-4" *ngFor="let address of addresses; let i = index">
-    <div class="card mx-1 my-2">
+    <div class="card mx-1 my-2 " [ngClass]="{'border-3 border-primary': selectedAddress == address.AId}">
       <!-- <div class="card mx-1 my-2"  [ngClass]="{'text-white bg-primary': address.Selected}"> -->
-      <div class="card-header text-white bg-dark" *ngIf="selectedAddress == address.AId">Delivering here.</div>
+      <!-- <div class="card-header text-white bg-dark" *ngIf="selectedAddress == address.AId">Delivering here.</div> -->
       <div class="card-body">
         <h5 class="card-title">{{address.Name}}</h5>
         <h6 class="card-subtitle mb-2">{{address.Building}}</h6>
