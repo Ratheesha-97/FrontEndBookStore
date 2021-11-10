@@ -111,6 +111,25 @@ export class UserService {
       }))
   }
 
+  
+  addBookToWishlist(bookId: number): any {
+    let userId = this.getUserId();
+    if (userId == null) {
+      this.userNotAuthenticated();
+      throw "Not Authenticated.";
+    }
+    let wish = {
+      UId: parseInt(userId),
+      BookId: bookId,
+    }
+    return this.http.post(this.REST_API_URL_BASE + "Wishlists/", wish)
+      .pipe(map((res: any) => {
+        console.log(res);
+        return res;
+      }))
+  }
+
+
   removeFromCart(id: number): any {
     return this.http.delete(this.REST_API_URL_BASE + "CartProducts/" + id)
       .pipe(map((res: any) => {

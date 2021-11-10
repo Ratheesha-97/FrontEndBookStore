@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
             
             sessionStorage.setItem("UserId", res.body.UId);
             sessionStorage.setItem("CartId", res.body.CartId);
-            sessionStorage.setItem("UserToken", JSON.stringify(res.body));
+            sessionStorage.setItem("UserToken", res.body.UId);
             sessionStorage.removeItem("AdminToken");
           }
           
