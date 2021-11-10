@@ -2,6 +2,8 @@ import { getLocaleDateFormat, getLocaleDateTimeFormat } from '@angular/common';
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { UserService } from 'src/app/user/services/user.service';
 // import { EventEmitter } from 'stream';
 import { ReviewService } from '../../services/review.service';
 
@@ -20,12 +22,12 @@ export class AddReviewComponent implements OnInit {
   error:boolean=false;
   @Output() onSubmit=new EventEmitter<boolean>();
 
-  constructor(private route: ActivatedRoute, private reviewService: ReviewService, private router: Router) {
+  constructor(private route: ActivatedRoute,private userService:UserService, private reviewService: ReviewService,private toastService:ToastService, private router: Router) {
     this.reviewForm = new FormGroup({
-      UserId: new FormControl(2),
+      UserId: new FormControl(this.userService.getUserId()),
       BookId: new FormControl(),
-      Review1: new FormControl(null),
-      Rating: new FormControl(0, Validators.compose([Validators.min(0), Validators.max(5)])),
+      Review1: new FormControl(null,Validators.maxLength(500)),
+      Rating: new FormControl(0, Validators.compose([Validators.min(1), Validators.max(5)])),
       SubmittedAt:new FormControl()
     })
   }
@@ -53,9 +55,8 @@ export class AddReviewComponent implements OnInit {
     console.log(this.reviewForm.value)
     
     this.reviewService.addReviewFun(this.reviewForm.value).subscribe(
-      (res: any) => console.log('HTTP response', res),
-      (err: any) => {console.log('HTTP Error', err); this.error=true;},
-      () => console.log('HTTP request completed.')
+      (res: any) => this.toastService.show("Review added",{classname:'bg-success text-light, delay 3000'}),
+      (err: any) => {this.toastService.show("Error ",{classname:'bg-success text-light, delay 3000'}); this.error=true;}
   );
     this.submitted=true;
     

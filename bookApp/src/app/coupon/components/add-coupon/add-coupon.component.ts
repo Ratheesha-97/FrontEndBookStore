@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
 import { CouponService } from '../../services/coupon.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class AddCouponComponent implements OnInit {
     'Expiry' :new FormControl(null,Validators.required)
 
   });
-  constructor(private couponService:CouponService,private router:Router) { }
+  constructor(private couponService:CouponService,private router:Router,private toastService:ToastService) { }
 
   ngOnInit(): void {
     this.addCouponForm=new FormGroup({
@@ -34,7 +35,11 @@ export class AddCouponComponent implements OnInit {
   addCoupon(){
     this.submitted=true;
     if(this.addCouponForm.valid){
-      this.couponService.addCouponFun(this.addCouponForm.value,this.router);
+      this.couponService.addCouponFun(this.addCouponForm.value,this.router).subscribe(
+        (res: any) => this.toastService.show("Coupon Addedd..!",{classname:'bg-success text-light, delay 3000'}),
+        (err: any) => {this.toastService.show("This coupon ID exists ",{classname:'bg-danger text-light, delay 3000'});},
+        ()=>this.router.navigateByUrl('coupon')
+    );
     }
     
   }

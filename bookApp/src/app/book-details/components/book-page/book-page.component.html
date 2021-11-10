@@ -19,6 +19,7 @@
             <br>
             <h1>{{book.Title}}</h1>
             <h5>( by {{book['Author']}} )</h5>
+            <p style="font-style: italic;">{{book['BCondition']}}</p>
             <div class="Rating"> {{book.BRating}} ☆ </div>
             <br>
             <hr>
@@ -31,7 +32,7 @@
                 <h3 style="text-align: center; ">Customer Review</h3>
                 <button class="Rating" style="float: right;" (click)="clicked=!clicked;">Add a review</button>
                 <div class="container" style="padding: 10px;">
-                    <app-add-review (onSubmit)="clicked=!($event)" [hidden]="!clicked"></app-add-review>
+                    <app-add-review (onSubmit)="clicked=!($event);this.ngOnInit()" [hidden]="!clicked"></app-add-review>
                 </div>
                 <br>
                 <div *ngFor="let review of reviewList" style="display: block;">

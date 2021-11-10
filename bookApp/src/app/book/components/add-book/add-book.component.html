@@ -1,4 +1,4 @@
-<div class="container" style="padding: 5% 20% 0% 20%;">
+<div class="container" style="padding: 5% 20% 0% 20%; background-color: gainsboro;">
     <form class="well form-horizontal" [formGroup]="bookForm" enctype="multipart/form-data" (ngSubmit)="addBookFun()">
 
         <div class="form-group">
@@ -32,8 +32,12 @@
             </span>
         </div>
         <div class="form-group">
-            <label for="Title">ISBN</label>
+            <label>ISBN</label>
             <input class="form-control" formControlName="ISBN">
+            <span class="text-danger"
+                *ngIf="(bookForm.controls['ISBN'].touched || submitted) && bookForm.controls['ISBN'].errors">
+                Exceeded limit
+            </span>
         </div>
         <div class="form-group">
             <label for="Title">Year of publish</label>
@@ -62,9 +66,13 @@
         <div class="form-group">
             <label for="Title">Description</label>
             <textarea class="form-control" formControlName="BDescri"></textarea>
+            <span class="text-danger"
+                *ngIf="(bookForm.controls['BDescri'].touched || submitted) && bookForm.controls['BDescri'].errors">
+                Exceeded the limit
+            </span>
         </div>
         <div class="form-group">
-            <label for="website">Condition</label>
+            <label for="condition">Condition</label>
             <select formControlName="BCondition" class="form-control">
                 <option selected>New</option>
                 <option>Used</option>
@@ -74,6 +82,10 @@
         <div class="form-group">
             <label for="Title">Tags</label>
             <textarea class="form-control" formControlName="BTags"></textarea>
+            <span class="text-danger"
+            *ngIf="(bookForm.controls['BTags'].touched || submitted) && bookForm.controls['BTags'].errors">
+            Exceeded the limit
+        </span>
         </div>
         <div class="form-group">
             
@@ -81,7 +93,7 @@
             <p></p>
             <input type="file" (change)="handleImgUpl($event)">
         </div>
-        <button type="submit" class="btn btn-primary">Add Book</button>
+        <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid">Add Book</button>
     </form>
     <br>
     <button class="btn btn-primary" routerLink="/book"> Go Back </button>

@@ -22,37 +22,27 @@ export class CouponService {
     return this.http.delete(this.API + id);    
   }
 
-  addCouponFun(data:Object,router:Router):any{
-    return this.http.post(this.API,data)
-    .toPromise()
-    .then((res:any)=>{
-      alert("Successfully added..!");
-      router.navigateByUrl('coupon');
-    })
-    .catch((err: any) => {
-      alert("The given Coupon ID already exists..!");
-      console.log(err);
-      return err;
-    });
+  addCouponFun(data:Object,router:Router):Observable<any>{
+    return this.http.post(this.API,data);
   }
   updateCoupon(updateData: any,router:Router): any {
     console.log(updateData); // before submitting to the REST API
     return this.http.put(this.API + updateData.CouponId, updateData)
-      .toPromise()
-      .then((res: any) => {
-        alert("Updated..!");
-        router.navigateByUrl('coupon');
-        console.log(res);
-        return res;
-      })
-      .catch((err: any) => {
-        alert("Encountered an error");
-        console.log(err);
-        return err;
-      })
-      .finally(() => {
-        console.log('It is over!');
-      });
+      // .toPromise()
+      // .then((res: any) => {
+      //   alert("Updated..!");
+      //   router.navigateByUrl('coupon');
+      //   console.log(res);
+      //   return res;
+      // })
+      // .catch((err: any) => {
+      //   alert("Encountered an error");
+      //   console.log(err);
+      //   return err;
+      // })
+      // .finally(() => {
+      //   console.log('It is over!');
+      // });
   }
 
 }

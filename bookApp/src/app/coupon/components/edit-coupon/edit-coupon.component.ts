@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ControlContainer, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
 import { CouponService } from '../../services/coupon.service';
 
 @Component({
   selector: 'app-edit-coupon',
   templateUrl: './edit-coupon.component.html',
   styles: [
+    `.form-group{
+      padding:5px;
+    }`
   ]
 })
 export class EditCouponComponent implements OnInit {
@@ -19,7 +23,7 @@ export class EditCouponComponent implements OnInit {
     'Expiry' :new FormControl(null)
 
   });
-  constructor(private couponService:CouponService,private route:ActivatedRoute,private router: Router) { }
+  constructor(private couponService:CouponService,private route:ActivatedRoute,private toastService:ToastService, private router: Router) { }
 
   async ngOnInit(): Promise<void> {
     let cId = this.route.snapshot.paramMap.get('id');
@@ -36,6 +40,10 @@ export class EditCouponComponent implements OnInit {
   }
   editCoupon(){
     console.log(this.editCouponForm.value);
-    this.couponService.updateCoupon(this.editCouponForm.value,this.router);
+    this.couponService.updateCoupon(this.editCouponForm.value,this.router).subscribe(
+      (res: any) => this.toastService.show("Coupon updated..!",{classname:'bg-success text-light, delay 3000'}),
+      (err: any) => {this.toastService.show("Error ",{classname:'bg-success text-light, delay 3000'});},
+      ()=>this.router.navigateByUrl('coupon')
+  );
   }
 }

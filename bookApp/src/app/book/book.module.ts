@@ -7,6 +7,7 @@ import { EditBookComponent } from './components/edit-book/edit-book.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddBookComponent } from './components/add-book/add-book.component';
+import { DeleteReviewComponent } from './components/delete-review/delete-review.component';
 
 
 
@@ -15,7 +16,8 @@ import { AddBookComponent } from './components/add-book/add-book.component';
     HomeBookComponent,
     
     EditBookComponent,
-         AddBookComponent
+         AddBookComponent,
+         DeleteReviewComponent
   ],
   imports: [
     CommonModule,

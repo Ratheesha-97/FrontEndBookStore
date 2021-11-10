@@ -9,23 +9,20 @@ import { ReviewService } from '../../services/review.service';
   styleUrls: ['./book-page.component.css']
 })
 export class BookPageComponent implements OnInit {
-book:any;
-reviews:any;
-reviewList: any;
-rating=0;
-clicked=false;
-  constructor(private route:ActivatedRoute,private bookService:BookService,private reviewService:ReviewService) { }
+  book: any;
+  reviews: any;
+  reviewList: any;
+  rating = 0;
+  clicked = false;
+
+  constructor(private route: ActivatedRoute, private bookService: BookService, private reviewService: ReviewService) { }
 
   async ngOnInit(): Promise<void> {
     let BId = this.route.snapshot.paramMap.get('id');
-    this.book=await this.bookService.getBookById(BId);
-    console.log(this.book)
-    this.reviews=await this.reviewService.getReviews();
-    console.log(this.reviews)
-    this.reviewList=this.reviews.filter((c: { BookId: string | null;Review1: string | null; })=>(c.BookId==BId && c.Review1!=null))
-    console.log(this.reviewList[0].UserInfo.FName);
-    console.log(this.reviewList);
-    this.rating=this.book['BRating'];
+    this.book = await this.bookService.getBookById(BId);
+    // console.log(this.book)
+    this.reviewList = await (await this.reviewService.getReviews()).filter((c: { BookId: string | null; Review1: string | null; }) => (c.BookId == BId && c.Review1 != null && c.Review1 != ""));
+    // this.rating=this.book['BRating'];
   }
 
 }
