@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
           console.log("user Logged in , data -> ", res.body);
           
           if(res.body.Role === 'admin'){
-            sessionStorage.setItem("AdminToken", JSON.stringify(res.body) );
+            // sessionStorage.setItem("AdminToken", JSON.stringify(res.body) );
+            sessionStorage.setItem("AdminToken", res.body.UId );
             sessionStorage.removeItem("UserToken");
           }
           else{            

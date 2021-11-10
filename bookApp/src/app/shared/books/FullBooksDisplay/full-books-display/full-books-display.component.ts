@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BookService } from 'src/app/shared/services/book.service';
-import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 import { UserService } from 'src/app/user/services/user.service';
 
 @Component({

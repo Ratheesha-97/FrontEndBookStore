@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, interval as observableInterval } from 'rxjs';
 import { takeWhile, scan, tap } from "rxjs/operators";
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 import { Address } from '../../models/address.model';
 import { CartItem } from '../../models/cart-item.model';
 import { Cart } from '../../models/cart.model';
@@ -30,7 +31,7 @@ export class CartComponent implements OnInit {
 	coupon!: Coupon;
 	cartSubscription: Subscription | undefined = undefined;
 
-	constructor(private userService: UserService, private router: Router) { }
+	constructor(private userService: UserService, private router: Router, private toastService: ToastService) { }
 
 	selectAddress(id: number): void {
 		this.selectedAddress = id;
@@ -95,15 +96,20 @@ export class CartComponent implements OnInit {
 	}
 
 	removeBtnClick(id: number) {
-		console.log("Removing product: " + id);
-
 		this.userService.removeFromCart(id)
-			.subscribe((res: any) => {
-				this.cartSubscription = this.userService.getUserCart()
-					.subscribe((res: Cart) => {
-						this.cart = res;
-					})
-			})
+			.subscribe(
+				(res: any) => {
+					this.toastService.show("Book removed from cart.", { classname: "bg-success text-light", delay: 3000 });
+					this.cartSubscription = this.userService.getUserCart()
+						.subscribe((res: Cart) => {
+							this.cart = res;
+						})
+				},
+				(err: any) => {
+					this.toastService.show("Error removing book.", { classname: "bg-danger text-light", delay: 3000 })
+					console.error(err);
+				}
+			)
 	}
 
 	onChange(i: number) {
@@ -139,10 +145,20 @@ export class CartComponent implements OnInit {
 			order['Coupon'] = this.coupon.CouponId;
 
 		this.userService.checkoutCart(order)
-			.subscribe((res: Order) => {
-				console.log(res);
-				this.router.navigate(['/user/success']);
-			})
+			.subscribe(
+				(res: Order) => {
+					console.log(res);
+					this.router.navigate(['/user/success']);
+				},
+				(err: any) => {
+					if (err.status === 401)
+						this.toastService.show("You are not authorized to create an order.", { classname: "bg-danger text-light", delay: 5000 })
+					else
+						this.toastService.show("Error creating order.", { classname: "bg-danger text-light", delay: 3000 })
+
+					console.error(err);
+				}
+			)
 	}
 
 	ngOnInit(): void {
