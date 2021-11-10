@@ -1,9 +1,4 @@
 <form class="col-md-6 offset-md-3" [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label>Id</label>
-        <input type="text"  formControlName="BSId"  readonly/>
-        
-    </div>
 
     <div class="form-group">
         <label>Author</label>
@@ -27,12 +22,6 @@
         <div *ngIf="(addCategoryForm.get('Description')?.invalid && addCategoryForm.get('Description')?.touched) || addCategoryForm.get('Description')?.dirty">
         <small class="text-danger" *ngIf="addCategoryForm.get('Description')?.errors?.required">Description is Required</small>  
         </div>
-    </div>
-
-    <div class="form-group">
-        <label>UserName</label>
-        <input type="text"  formControlName="UserName"  readonly/>
-        
     </div>
 
     <div class="form-group">

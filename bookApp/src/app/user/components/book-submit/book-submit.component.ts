@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BookSubmissionServiceService } from 'src/app/admin/book-submission/book-submission-service.service';
+import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-book-submit',
@@ -12,15 +14,12 @@ export class BookSubmitComponent implements OnInit {
 
 
   addCategoryForm = new FormGroup({
-    'BSId': new FormControl(),
-    'Author': new FormControl(),
-    'Title': new FormControl(),
-    'Description': new FormControl(),
-    'UserName': new FormControl(),
-    'Condition': new FormControl(),
-    'ReviewStatus': new FormControl(),
-    'UId': new FormControl()
-
+    'Author': new FormControl("", Validators.required),
+    'Title': new FormControl("", Validators.required),
+    'Description': new FormControl("", Validators.required),
+    'Condition': new FormControl("", Validators.required),
+    'ReviewStatus': new FormControl('Under Review'),
+    'UId': new FormControl(this.userService.getUserId())
   });
 
   BsId: any;
@@ -30,7 +29,7 @@ export class BookSubmitComponent implements OnInit {
   errorMessage = "";
 
 
-  constructor(private bookSubmissionService: BookSubmissionServiceService) {
+  constructor(private bookSubmissionService: BookSubmissionServiceService, private userService: UserService, private toastService: ToastService) {
 
   }
 
@@ -40,14 +39,21 @@ export class BookSubmitComponent implements OnInit {
   onSubmit() {
     this.bookSubmissionService.addSubmission(this.addCategoryForm.value)
       .subscribe((res: any) => {
-        console.log("Updated Book Submission recieved in ts -> ", res);
+        this.addCategoryForm.setValue({
+          'Author': "",
+          'Title': "",
+          'Description': "",
+          'Condition': "",
+          'ReviewStatus': 'Under Review',
+          'UId': this.userService.getUserId()
+        })
 
-        this.failedUpdate = false;
-        this.successUpdate = true;
-        this.BookSubmission = res;
+        this.toastService.show("Submitted book for review.",  { classname: 'bg-success text-light', delay: 3000 });
       },
         (error) => {
           console.log("error here in TS of edit order -> ", error);
+          this.toastService.show("Error submitting book.",  { classname: 'bg-danger text-light', delay: 3000 });
+       
           this.successUpdate = false;
           this.failedUpdate = true;
           this.errorMessage = error;
