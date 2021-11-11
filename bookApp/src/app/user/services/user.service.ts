@@ -17,7 +17,7 @@ export class UserService {
   getUserId(): string | null {
     return sessionStorage.getItem("UserId");
   }
-
+  
   getUserCartId(): string | null {
     let cartId = sessionStorage.getItem('CartId');
     if (cartId == null) {
@@ -162,6 +162,9 @@ export class UserService {
         this.updateSession();
         return res;
       }))
+  }
+  updateUser(formdata:any,userForm:any):Observable<any>{
+    return this.http.put(this.REST_API_URL_BASE+ "UserInfoes/"+this.getUserId(),formdata);
   }
 
 }

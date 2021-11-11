@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
 import { CouponService } from '../../services/coupon.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { CouponService } from '../../services/coupon.service';
 export class CouponHomeComponent implements OnInit {
   coupons: any[]=[];
   coupon:any|undefined;
-  constructor(private CouponServices:CouponService) { }
+  constructor(private CouponServices:CouponService,private toastService :ToastService) { }
 
   ngOnInit(): void {
     this.allCoupons();
@@ -21,9 +22,10 @@ export class CouponHomeComponent implements OnInit {
     })
   }
   deleteCoupon(id: any){
-    this.CouponServices.deleteCouponById(id).subscribe(data=>{
-      console.log(data);
-      alert("Delete Successfull");
-      this.allCoupons();
-  })}
+    this.CouponServices.deleteCouponById(id).subscribe(
+      (res: any) => this.toastService.show("Coupon deleted..!",{classname:'bg-success text-light, delay 3000'}),
+      (err: any) => {this.toastService.show("Error ",{classname:'bg-success text-light, delay 3000'});},
+    
+  );
+    }
 }

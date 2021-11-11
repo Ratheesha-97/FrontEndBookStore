@@ -17,7 +17,11 @@ import { CategorydisplayComponent } from './shared/category/categorydisplay/cate
 import { FullBooksDisplayComponent } from './shared/books/FullBooksDisplay/full-books-display/full-books-display.component';
 import { FilterByDisplayComponent } from './shared/books/FilterByDisplay/filter-by-display/filter-by-display.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { CouponModule } from './coupon/coupon.module';
+
 import { ToastsContainerComponent } from './shared/toasts/components/toasts-container/toasts-container.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import { ToastsContainerComponent } from './shared/toasts/components/toasts-cont
     FullBooksDisplayComponent,
     FilterByDisplayComponent,
     ToastsContainerComponent,
+    
   ],
   imports: [
     BrowserModule,
