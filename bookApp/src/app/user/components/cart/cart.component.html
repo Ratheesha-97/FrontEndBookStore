@@ -1,50 +1,65 @@
 <div class="container" *ngIf="cart.CartProducts.length>0;else empty">
-  <table class="table table-striped border">
-    <thead>
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Author</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Total Price</th>
-        <th></th>
-      </tr>
-    </thead>
+  <div class="card my-3">
+    <div class="card-body">
 
-    <tbody>
-      <tr *ngFor="let cartItem of cart.CartProducts; let i = index">
-        <td>{{cartItem.Book.Title}}</td>
-        <td>{{cartItem.Book.Author}}</td>
-        <td>
-          <input type="number" [(ngModel)]="cartItem.Quantity" (change)="onChange(i)">
-        </td>
-        <td>{{cartItem.Quantity * cartItem.Book.Price}}</td>
-        <td><button class="btn btn-secondary" (click)="removeBtnClick(cartItem.CPId)">Remove</button></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td>Total Cart Price</td>
-        <td>₹ {{getCartprice()}}</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+            <th></th>
+          </tr>
+        </thead>
 
-  <label>Coupon</label>
-  <input type="text" [(ngModel)]="couponInput">
-  <Button (click)="couponBtnClick()">Apply Coupon</Button>
-  <p [ngStyle]="couponStyle">{{couponInfo}}</p>
+        <tbody>
+          <tr *ngFor="let cartItem of cart.CartProducts; let i = index">
+            <td>{{cartItem.Book.Title}}</td>
+            <td>{{cartItem.Book.Author}}</td>
+            <td>
+              <input type="number" class="form-control" style="width: 100px;" [(ngModel)]="cartItem.Quantity" (change)="onChange(i)">
+            </td>
+            <td>{{cartItem.Quantity * cartItem.Book.Price}}</td>
+            <td><button class="btn btn-secondary" (click)="removeBtnClick(cartItem.CPId)">Remove</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Total Cart Price</td>
+            <td>₹ {{getCartprice()}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body row">
+      <div class="col-4 ">
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroup-sizing-default">Coupon</span>
+          <input class="form-control" type="text" [(ngModel)]="couponInput">
+          <button class="btn btn-outline-secondary" (click)="couponBtnClick()" type="button">Apply Coupon</button>
+        </div>
+        <p [ngStyle]="couponStyle">{{couponInfo}}</p> 
+      </div>
+      <div class="col-4 offset-4">
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroup-sizing-default">Coins</span>
+          <input style="width: 130px;" class="form-control" type="number" [(ngModel)]="coinInput">
+          <button class="btn btn-outline-secondary" (click)="coinBtnClick()" type="button">Redeem</button>
+        </div>
+        <p [ngStyle]="coinStyle">{{coinInfo}}</p> 
+      </div>
+    </div>
+  </div>
 
   <br>
-  <p>
-    <span>Order Price: </span>
-    <span><strong>₹ {{orderPrice}}</strong></span>
-    <span style="color: green;" *ngIf="discount>0"> ₹ {{discount}} OFF!</span>
-  </p>
   <br>
-  <br>
-
-  <button class="btn btn-primary" (click)="proceedToCheckout(container)" [disabled]="checkingOut">Proceed to
+  <button class="btn btn-secondary" (click)="proceedToCheckout(container)" [disabled]="checkingOut">Proceed to
     Checkout</button>
 
   <br>
@@ -53,7 +68,7 @@
     <div *ngIf="checkingOut">
       <app-address-list (onAddressSelect)="selectAddress($event)" [addresses]="addresses"></app-address-list>
       <br>
-      <button class="btn btn-primary" (click)="onCheckoutClick()">Checkout Cart</button>
+      <button class="btn btn-secondary" (click)="onCheckoutClick()">Checkout Cart</button>
     </div>
   </div>
 </div>

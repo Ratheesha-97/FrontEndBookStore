@@ -19,16 +19,23 @@ export class CartComponent implements OnInit {
 
 	couponInput: string = "";
 	couponInfo: string = "";
+	couponStyle = { 'color': "red" };
+	coupon!: Coupon;
+
+
+	coinInput: string = "";
+	coinInfo: string = "";
+	coinStyle = { 'color': "red" };
+	coins: number = 0;
+
 	orderPrice: number = 0;
 	discount: number = 0;
 	couponInfoVisible: boolean = false;
 	checkingOut = false;
-	couponStyle = { 'color': "red" };
 	val: number = 0;
 	cart: Cart = new Cart;
 	addresses: Address[] = [];
 	selectedAddress: number = -1;
-	coupon!: Coupon;
 	cartSubscription: Subscription | undefined = undefined;
 
 	constructor(private userService: UserService, private router: Router, private toastService: ToastService) { }
@@ -52,14 +59,21 @@ export class CartComponent implements OnInit {
 
 	calculateOrderPrice(): void {
 		this.orderPrice = this.getCartprice();
+		this.discount = 0;
 		if (this.coupon) {
 			if (this.orderPrice > this.coupon.MinimumOrderPrice) {
-				this.discount = Math.min(this.coupon.DiscountPercentage * this.orderPrice / 100, this.coupon.MaximumDiscount);
-				this.orderPrice -= this.discount;
+				this.discount += Math.min(this.coupon.DiscountPercentage * this.orderPrice / 100, this.coupon.MaximumDiscount);
 			}
 		}
 		else
 			console.log("No Coupon.");
+
+		if (this.coins >= 0)
+			this.discount += this.coins;
+		else
+			console.log("Invalid coins.");
+
+		this.orderPrice -= this.discount;
 
 	}
 
@@ -128,7 +142,31 @@ export class CartComponent implements OnInit {
 		});
 		return res;
 	}
+	coinBtnClick(): void {
+		if (this.coinInput == "") {
+			this.coinStyle = { 'color': "black" };
+			this.coinInfo = "No coins entered."
+			return;
+		}
 
+		let coins = parseInt(this.coinInput);
+		this.userService.getUserDetails()
+			.subscribe(
+				(res: any) => {
+					let userCoins = res.Coins;
+					if (coins <= userCoins) {
+						this.coins = coins;
+						this.coinStyle = { 'color': "green" };
+						this.coinInfo = `${coins} coins redeemed!`
+					} else {
+						this.coins = 0;
+						this.coinStyle = { 'color': "red" };
+						this.coinInfo = `Insufficient coins in wallet.`
+					}
+					this.calculateOrderPrice();
+				}
+			)
+	}
 
 	onCheckoutClick() {
 		console.log(new Date());
@@ -139,7 +177,7 @@ export class CartComponent implements OnInit {
 			OrderStatus: 0,
 			UserId: this.userService.getUserId(),
 			AId: this.selectedAddress,
-			// Coins: 0,
+			Coins: this.coins,
 		}
 		if (this.coupon)
 			order['Coupon'] = this.coupon.CouponId;
