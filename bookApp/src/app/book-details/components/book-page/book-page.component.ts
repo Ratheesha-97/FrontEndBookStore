@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from 'src/app/book/services/book.service';
-import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 import { UserService } from 'src/app/user/services/user.service';
 import { ReviewService } from '../../services/review.service';
 

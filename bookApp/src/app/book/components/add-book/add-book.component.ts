@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryModule } from 'src/app/admin/category/category.module';
 import { CategoryService } from 'src/app/shared/services/category.service';
-import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 import { Book } from '../../models/book';
 import { BookService } from '../../services/book.service';
 

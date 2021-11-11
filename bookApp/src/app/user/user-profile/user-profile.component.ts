@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 import { UserService } from '../services/user.service';
 
 @Component({

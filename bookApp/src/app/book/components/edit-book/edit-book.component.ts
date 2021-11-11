@@ -5,7 +5,7 @@ import { BookService } from '../../services/book.service';
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../../models/book';
 import { CategoryService } from 'src/app/shared/services/category.service';
-import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 @Component({
   selector: 'app-edit-book',

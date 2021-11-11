@@ -17,7 +17,7 @@ import { CategorydisplayComponent } from './shared/category/categorydisplay/cate
 import { FullBooksDisplayComponent } from './shared/books/FullBooksDisplay/full-books-display/full-books-display.component';
 import { FilterByDisplayComponent } from './shared/books/FilterByDisplay/filter-by-display/filter-by-display.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsContainerComponent } from './Shared/toasts/components/toasts-container/toasts-container.component';
+import { ToastsContainerComponent } from './shared/toasts/components/toasts-container/toasts-container.component';
 import { CouponModule } from './coupon/coupon.module';
 
 @NgModule({
