@@ -36,6 +36,12 @@ getCategoryForDropdown():any{
   }));
 }
 
+addTest(testimonialData:any):any{
+  return this.http.post(this.REST_API_URL,testimonialData);
+  
+}
 
 
 }
+
+

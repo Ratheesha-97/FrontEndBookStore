@@ -42,19 +42,20 @@
 
 
 <!-------------------------------------------------------------------------------------->
-<div class="col-xl-10" style="margin: auto;">
+<div class="col-md-12 col-xl-10 " style="margin: auto;">
 <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel" >
 	<ol class="carousel-indicators">
 		<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 		<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+		<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 	</ol>
 	<!-- Carousel items -->
-	<div class="carousel-inner ">
+	<div class="carousel-inner " style="margin: auto;">
 
 
 		<div class="carousel-item active">
 			<div class="row">
-				<div class="col-xl-4" *ngFor="let book of TopBookslice1"><a  routerLink="/Books"><img
+				<div class="col-sm-6 col-md-4 col-xl-4" *ngFor="let book of TopBookslice1"><a  routerLink="/book-details/{{book.BookId}}"><img
 							src="https://codingyaar.com/wp-content/uploads/bootstrap-4-card-image-left-demo-image.jpg"
 							alt="Image" class="imgsize"></a>
 							<div class="carousel-caption d-none d-md-block">
@@ -70,7 +71,7 @@
 		<div class="carousel-item" *ngFor="let smallslice of TopBookslice2">
 			<div class="row" >
 				
-				<div class="col-xl-4" *ngFor="let book of smallslice"><a  routerLink="/Books"><img
+				<div class="col-sm-6 col-md-4 col-xl-4" *ngFor="let book of smallslice"><a  routerLink="/book-details/{{book.BookId}}"><img
 							src="https://codingyaar.com/wp-content/uploads/bootstrap-4-card-image-left-demo-image.jpg"
 							alt="Image" class="imgsize " ></a>
 							<div class="carousel-caption d-none d-md-block">

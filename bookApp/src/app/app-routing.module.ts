@@ -6,7 +6,8 @@ import { FilterByDisplayComponent } from './shared/books/FilterByDisplay/filter-
 import { FullBooksDisplayComponent } from './shared/books/FullBooksDisplay/full-books-display/full-books-display.component';
 import { CategorydisplayComponent } from './shared/category/categorydisplay/categorydisplay.component';
 import { CouponHomeComponent } from './coupon/components/coupon-home/coupon-home.component';
-import { AdminAuthGuard } from './Shared/guards/adminGuard/admin-auth.guard';
+import { AdminAuthGuard } from './shared/guards/adminGuard/admin-auth.guard';
+//import { AdminAuthGuard } from './Shared/guards/adminGuard/admin-auth.guard';
 
 
 const routes: Routes = [
