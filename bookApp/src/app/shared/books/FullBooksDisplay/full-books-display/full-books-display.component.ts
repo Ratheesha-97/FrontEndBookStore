@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BookService } from 'src/app/shared/services/book.service';
-import { ToastService } from 'src/app/shared/toasts/services/toast.service';
+// import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+// import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
 import { UserService } from 'src/app/user/services/user.service';
+// import { BookService } from 'src/app/shared/services/book.service';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
+// import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-full-books-display',
@@ -36,7 +40,7 @@ export class FullBooksDisplayComponent implements OnInit {
             this.toastService.show("Book already in cart.", { classname: 'bg-danger text-light', delay: 3000 })
           }
           else{
-            this.toastService.show("error in cart.", { classname: 'bg-danger text-light', delay: 3000 })
+            this.toastService.show("Item already in cart.", { classname: 'bg-danger text-light', delay: 3000 })
           }
         }
       )
@@ -54,7 +58,7 @@ export class FullBooksDisplayComponent implements OnInit {
             this.toastService.show("Book already in wishlist.", { classname: 'bg-danger text-light', delay: 3000 })
           }
           else{
-            this.toastService.show("error in wishlist.", { classname: 'bg-danger text-light', delay: 3000 })
+            this.toastService.show("Item in wishlist.", { classname: 'bg-danger text-light', delay: 3000 })
           }
         }
       )
