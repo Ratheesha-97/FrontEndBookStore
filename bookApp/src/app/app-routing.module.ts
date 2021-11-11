@@ -7,7 +7,7 @@ import { FullBooksDisplayComponent } from './shared/books/FullBooksDisplay/full-
 import { CategorydisplayComponent } from './shared/category/categorydisplay/categorydisplay.component';
 import { CouponHomeComponent } from './coupon/components/coupon-home/coupon-home.component';
 import { AdminAuthGuard } from './shared/guards/adminGuard/admin-auth.guard';
-//import { AdminAuthGuard } from './Shared/guards/adminGuard/admin-auth.guard';
+import { AuthGuard } from './shared/guards/userGuard/auth.guard';
 
 
 const routes: Routes = [
@@ -36,7 +36,8 @@ const routes: Routes = [
   // {path:'coupon1',component:CouponHomeComponent}
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin',

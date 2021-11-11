@@ -1,4 +1,3 @@
-<p>wishlist works!</p>
 <table class="table table-striped">
 
     <thead>
@@ -9,11 +8,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let wish of wishlist; let i = index">
+      <tr  *ngFor="let wish of wishlist">
         <td>{{wish.Book.Title}}</td>
         <td>{{wish.Book.Author}}</td>
         <td>{{wish.Book.Price}}</td>
-        <td><button class="btn btn-primary" (click)="addBookToCart(i)">Add to Cart</button></td>
+        <td><button class="btn btn-primary" (click)="addBookToCart(wish.Book.BookId, wish.WId)">Add to Cart</button></td>
+        <td><button class="btn btn-secondary" (click)="removeBtnClick(wish.WId)">Remove</button></td>
       </tr>
     </tbody>
   

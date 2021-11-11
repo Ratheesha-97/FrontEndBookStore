@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
           console.log("user Logged in , data -> ", res.body);
           
           if(res.body.Role === 'admin'){
-            sessionStorage.setItem("AdminToken", JSON.stringify(res.body) );
+            // sessionStorage.setItem("AdminToken", JSON.stringify(res.body) );
+            sessionStorage.setItem("AdminToken", res.body.UId );
             sessionStorage.removeItem("UserToken");
           }
           else{            
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem("UserId", res.body.UId);
             sessionStorage.setItem("UserName", res.body.UserName);
             sessionStorage.setItem("CartId", res.body.CartId);
-            sessionStorage.setItem("UserToken", JSON.stringify(res.body));
+            sessionStorage.setItem("UserToken", res.body.UId);
             sessionStorage.removeItem("AdminToken");
           }
            
