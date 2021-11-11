@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from 'src/app/book/services/book.service';
-import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
+
 import { UserService } from 'src/app/user/services/user.service';
 import { ReviewService } from '../../services/review.service';
 
@@ -17,19 +19,24 @@ export class BookPageComponent implements OnInit {
   rating = 0;
   clicked = false;
 
+
   constructor(private route: ActivatedRoute, 
     private bookService: BookService,
     private userService: UserService,
     private toastService:ToastService, 
     private reviewService: ReviewService) { }
 
+
   async ngOnInit(): Promise<void> {
     let BId = this.route.snapshot.paramMap.get('id');
     this.book = await this.bookService.getBookById(BId);
+
     // console.log(this.book)
     this.reviewList = await (await this.reviewService.getReviews()).filter((c: { BookId: string | null; Review1: string | null; }) => (c.BookId == BId && c.Review1 != null && c.Review1 != ""));
     // this.rating=this.book['BRating'];
   }
+
+
   addToCartBtn(id: number) {
     this.userService.addBookToCart(id)
       .subscribe(
@@ -38,9 +45,31 @@ export class BookPageComponent implements OnInit {
           this.toastService.show("Book added to cart.", { classname: 'bg-success text-light', delay: 3000 })
         },
         (err: any) => {
-          if (err.status == 500) {
-            this.toastService.show("Book already in cart.", { classname: 'bg-danger text-light', delay: 3000 })
-          }
+
+          let errorMessage = "Error adding book to cart.";
+          if (err.status == 500)
+            errorMessage = "Book already in cart.";
+
+          console.error(err);
+          this.toastService.show(errorMessage, { classname: 'bg-danger text-light', delay: 3000 })
+        }
+      )
+  }
+
+  addToWishlistBtn(id: number) {
+    this.userService.addBookToWishlist(id)
+      .subscribe(
+        (res: any) => {
+          console.log("Book added to wishlist.");
+          this.toastService.show("Book added to wishlist.", { classname: 'bg-success text-light', delay: 3000 })
+        },
+        (err: any) => {
+          let errorMessage = "Error adding book to wishlist.";
+          if (err.status == 500)
+            errorMessage = "Book already in wishlist.";
+
+          console.error(err);
+          this.toastService.show(errorMessage, { classname: 'bg-danger text-light', delay: 3000 })
         }
 
       )

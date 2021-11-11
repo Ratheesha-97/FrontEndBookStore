@@ -5,6 +5,8 @@ export class ToastService {
   toasts: any[] = [];
 
   show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
+    console.log("Showing Toasts.");
+    
     this.toasts.push({ textOrTpl, ...options });
   }
 

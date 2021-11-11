@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthServicesService } from 'src/app/auth/auth-services.service';
 import { TestimonialService } from 'src/app/testimonial.service';
 import { CategoryService } from '../services/category.service';
 
@@ -23,8 +24,9 @@ export class HeaderComponent implements OnInit {
 	ISBN:String="ISBN";
 	Tag="Tag";
 	selected="Filter here";
-
-	constructor(private testServ: TestimonialService, private catServ: CategoryService,private route:ActivatedRoute,private router:Router) { }
+	loggedin:boolean=false;
+    name:any;
+	constructor(private authserv:AuthServicesService, private testServ: TestimonialService, private catServ: CategoryService,private route:ActivatedRoute,private router:Router) { }
 
 	ngOnInit(): void {
 
@@ -36,13 +38,24 @@ export class HeaderComponent implements OnInit {
 				this.catData = res1;
 				this.CurrMenu = this.catData[0].CName;
 			});
+			this.loggedin=this.authserv.isAuth();
+		if(this.loggedin){
+		console.log("logged in user")}
+		this.name = "Hi "+sessionStorage.getItem('UserName');
 		});
+		
 	}
 
 	SearchByFilter():void{
 		  
 		  this.router.navigate(['/Searchbooks', this.optionSelected, this.searchText]);
 		//this.router.navigate(['../Searchbooks'],{Filter:this.optionSelected,searchText:this.searchText});
+	}
+
+    logout():void{
+		sessionStorage.removeItem('UserToken');
+		this.loggedin=false;
+		this.router.navigateByUrl('/home');
 	}
 
 

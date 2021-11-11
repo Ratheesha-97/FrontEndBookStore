@@ -28,19 +28,19 @@ export class UserService {
   }
 
   isAdmin(): boolean {
-    if(sessionStorage.getItem("AdminToken") == null)
+    if (sessionStorage.getItem("AdminToken") == null)
       return false;
     return true;
   }
 
   updateSession(): void {
-    
+
     this.http.get(this.REST_API_URL_BASE + "UserInfoes/" + this.getUserId())
       .subscribe((res: any) => {
         console.log("Got User Info.");
         console.log("CartId:", res.CartId);
-        
-        
+
+
         sessionStorage.setItem('CartId', res.CartId);
       })
   }
@@ -90,7 +90,7 @@ export class UserService {
 
   userNotAuthenticated(): void {
     console.log("User is not authenticated.");
-    
+
   }
 
   addBookToCart(bookId: number): any {
@@ -110,6 +110,32 @@ export class UserService {
         return res;
       }))
   }
+
+  removeFromWishlist(id: number): any {
+    return this.http.delete(this.REST_API_URL_BASE + "Wishlists/" + id)
+      .pipe(map((res: any) => {
+        return res;
+      }))
+  }
+
+
+  addBookToWishlist(bookId: number): any {
+    let userId = this.getUserId();
+    if (userId == null) {
+      this.userNotAuthenticated();
+      throw "Not Authenticated.";
+    }
+    let wish = {
+      UId: parseInt(userId),
+      BookId: bookId,
+    }
+    return this.http.post(this.REST_API_URL_BASE + "Wishlists/", wish)
+      .pipe(map((res: any) => {
+        console.log(res);
+        return res;
+      }))
+  }
+
 
   removeFromCart(id: number): any {
     return this.http.delete(this.REST_API_URL_BASE + "CartProducts/" + id)

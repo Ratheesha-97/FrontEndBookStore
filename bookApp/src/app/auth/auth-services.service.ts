@@ -53,4 +53,13 @@ export class AuthServicesService {
         return res;
       }));
   }
+
+  isAuth():boolean
+  {
+    if(sessionStorage.getItem('UserToken') || sessionStorage.getItem('AdminToken'))
+    {
+    return true;
+    }
+    return false;
+  }
 }
