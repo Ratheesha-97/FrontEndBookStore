@@ -1,5 +1,7 @@
 <!-- <button id="btn" (click)="allBooks()">Get Data</button> -->
-<div class="container">
+<div class="container" style="padding: 5%;">
+    <h1 style="text-align: center;">Books</h1>
+    <br>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
@@ -19,15 +21,14 @@
                 <td>{{ book.Author }}</td>
                 <td>{{ book.Price }}</td>
                 <td>
-                    <!-- <button class="btn btn-primary" (click)="viewBook(book.BookId)">View</button> -->
+                    <button class="btn btn-primary" routerLink="/book-details/{{book.BookId}}">Book Details</button>
                     <button class="btn btn-warning" routerLink="/book/{{book.BookId}}"> View & Edit </button>
-
                     <button class="btn btn-danger" (click)="deleteBook(book.BookId)"> Delete </button>
                 </td>
             </tr>
         </tbody>
     </table>
-    <hr>
+ 
     <button class="btn btn-warning" routerLink="/book/add">Add New Book</button>
 
 </div>

@@ -11,7 +11,6 @@ import { Book } from '../models/book';
 export class BookService {
 
   public API = 'https://localhost:44390/api/Books/';
-  public CAPI = 'https://localhost:44390/api/Categories/';
   postData: any;
   constructor(private http: HttpClient) { }
 
@@ -21,51 +20,23 @@ export class BookService {
   async getBookById(id: any): Promise<any> {
     return this.http.get(this.API + id).toPromise();    
   }
-  async getCat(): Promise<any> {
-    return this.http.get(this.CAPI).toPromise();      
+ 
+  deleteBookById(id: number):Observable<any> {
+    return this.http.delete(this.API + id);
   }
-  deleteBookById(id: number) {
-    this.http.delete(this.API + id)
-    .toPromise()
-      .then((res: any) => {
-        alert("Deleted..!");
-        console.log(res);
-        return res;
-      })
-      .catch((err: any) => {
-        alert("This entry cannot be deleted..!");
-        console.log(err);
-        return err;
-      })
+  deleteReview(id:number):Observable<any>{
+    return this.http.delete("https://localhost:44390/api/Reviews/"+id);   
   }
-  addBook(postData: FormData,router:Router): any {
-    return this.http.post(this.API, postData)
-    .toPromise()
-    .then((res: any) => {
-      alert("Book added..!");
-      router.navigateByUrl('book');
-      return res;
-    })
-    .catch((err: any) => {
-      alert("A book with the same title exist, you can edit that entry or if you are trying to insert a used copy of the same book please change the condition to Used");
-      console.log(err);
-      return err;
-    });
+  getReviews():Observable<any[]>{
+    return this.http.get<any>("https://localhost:44390/api/Reviews");
   }
-  updateBook(updateableBookData: any,router:Router): any {
-    console.log(updateableBookData); // before submitting to the REST API
+  addBook(postData: FormData,router:Router): Observable<any> {
+    return this.http.post(this.API, postData);
+  }
+  updateBook(updateableBookData: any,router:Router):Observable<any> {
+    // console.log(updateableBookData); // before submitting to the REST API
     return this.http.put(this.API + updateableBookData.BookId, updateableBookData)
-      .toPromise()
-      .then((res: any) => {
-        alert("Updated..!");
-        router.navigateByUrl('book');
-        return res;
-      })
-      .catch((err: any) => {
-        alert("Encountered an error");
-        console.log(err);
-        return err;
-      })
+     
      
   }
 }

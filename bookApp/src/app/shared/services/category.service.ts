@@ -18,5 +18,7 @@ export class CategoryService {
       return res1;
     }));
   }
-
+  async getCat(): Promise<any> {
+    return this.http.get(this.REST_API_URL).toPromise();      
+  }
 }
