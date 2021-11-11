@@ -7,6 +7,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { AddressListComponent } from './components/address-list/address-list.component';
 import { AddressCreateComponent } from './components/address-create/address-create.component';
 import { SuccessComponent } from './components/success/success.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const userRoutes: Routes = [
   {path: 'cart', component: CartComponent},
@@ -14,7 +15,8 @@ const userRoutes: Routes = [
   {path: 'orders', component: OrderListComponent},
   {path: 'addresses', component: AddressListComponent},
   {path: 'address-create', component: AddressCreateComponent},
-  {path: 'success', component: SuccessComponent}
+  {path: 'success', component: SuccessComponent},
+  {path:'profile',component:UserProfileComponent}
 ]
 
 

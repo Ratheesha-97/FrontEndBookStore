@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from 'src/app/book/services/book.service';
+import { ToastService } from 'src/app/Shared/toasts/services/toast.service';
+import { UserService } from 'src/app/user/services/user.service';
 import { ReviewService } from '../../services/review.service';
 
 @Component({
@@ -15,7 +17,11 @@ export class BookPageComponent implements OnInit {
   rating = 0;
   clicked = false;
 
-  constructor(private route: ActivatedRoute, private bookService: BookService, private reviewService: ReviewService) { }
+  constructor(private route: ActivatedRoute, 
+    private bookService: BookService,
+    private userService: UserService,
+    private toastService:ToastService, 
+    private reviewService: ReviewService) { }
 
   async ngOnInit(): Promise<void> {
     let BId = this.route.snapshot.paramMap.get('id');
@@ -23,6 +29,21 @@ export class BookPageComponent implements OnInit {
     // console.log(this.book)
     this.reviewList = await (await this.reviewService.getReviews()).filter((c: { BookId: string | null; Review1: string | null; }) => (c.BookId == BId && c.Review1 != null && c.Review1 != ""));
     // this.rating=this.book['BRating'];
+  }
+  addToCartBtn(id: number) {
+    this.userService.addBookToCart(id)
+      .subscribe(
+        (res: any) => {
+          console.log("Book added to cart.");
+          this.toastService.show("Book added to cart.", { classname: 'bg-success text-light', delay: 3000 })
+        },
+        (err: any) => {
+          if (err.status == 500) {
+            this.toastService.show("Book already in cart.", { classname: 'bg-danger text-light', delay: 3000 })
+          }
+        }
+
+      )
   }
 
 }
