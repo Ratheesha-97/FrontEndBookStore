@@ -10,6 +10,7 @@ import { AddressListComponent } from './components/address-list/address-list.com
 import { AddressCreateComponent } from './components/address-create/address-create.component';
 import { SuccessComponent } from './components/success/success.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { BookSubmitComponent } from './components/book-submit/book-submit.component';
 
 
 
@@ -22,7 +23,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AddressListComponent,
     AddressCreateComponent,
     SuccessComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    BookSubmitComponent
   ],
   imports: [
     CommonModule,

@@ -21,6 +21,13 @@ export class BookSubmissionServiceService {
       })
   }
 
+  addSubmission(submission: any) {
+    return this.http.post(this.API, submission)
+      .pipe(map( (res: any) => {
+        return res;
+      }))
+  }
+
   UpdateSubmission(id:number, obj: any){
     return this.http.put(this.API + "/" + id, obj)
       .pipe( map( (res:any) => {

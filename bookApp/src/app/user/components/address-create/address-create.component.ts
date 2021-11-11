@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 import { Address } from '../../models/address.model';
 import { UserService } from '../../services/user.service';
 
@@ -19,7 +20,7 @@ export class AddressCreateComponent implements OnInit {
 
   addAddressForm!: FormGroup;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private toastService: ToastService) { }
 
   ngOnInit(): void {
 
@@ -55,11 +56,18 @@ export class AddressCreateComponent implements OnInit {
     console.log("Submitting");
 
     this.userService.createAddress(this.addAddressForm.value)
-      .subscribe((res: any) => {
-        if (res && res.AId) {
-          this.isSaved = true;
+      .subscribe(
+        (res: any) => {
+          if (res && res.AId) {
+            // this.isSaved = true;
+            this.toastService.show("Address Created.", { classname: "bg-success text-light", delay: 3000 });
+          }
+        },
+        (err: any) => {
+          this.toastService.show("Error creating address.", { classname: "bg-danger text-light", delay: 3000 });
+          console.error(err);
         }
-      })
+      )
   }
 
 }
