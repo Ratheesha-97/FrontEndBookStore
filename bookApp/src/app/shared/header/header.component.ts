@@ -26,6 +26,9 @@ export class HeaderComponent implements OnInit {
 	selected="Filter here";
 	loggedin:boolean=false;
     name:any;
+
+	UserLoggedIn=false;
+	AdminLoggedIn=false;
 	constructor(private authserv:AuthServicesService, private testServ: TestimonialService, private catServ: CategoryService,private route:ActivatedRoute,private router:Router) { }
 
 	ngOnInit(): void {
@@ -42,6 +45,17 @@ export class HeaderComponent implements OnInit {
 		if(this.loggedin){
 		console.log("logged in user")}
 		this.name = "Hi "+sessionStorage.getItem('UserName');
+
+		if(sessionStorage.getItem('Role')=='admin')
+		{
+			this.AdminLoggedIn=true;
+			this.UserLoggedIn=false;
+		}
+
+		else{
+			this.AdminLoggedIn=false;
+			this.UserLoggedIn=true;
+		}
 		});
 		
 	}
@@ -54,6 +68,7 @@ export class HeaderComponent implements OnInit {
 
     logout():void{
 		sessionStorage.removeItem('UserToken');
+		sessionStorage.removeItem('AdminToken');
 		this.loggedin=false;
 		this.router.navigateByUrl('/home');
 	}
