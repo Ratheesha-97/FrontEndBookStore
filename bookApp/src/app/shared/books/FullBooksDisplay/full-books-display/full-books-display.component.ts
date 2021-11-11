@@ -35,6 +35,9 @@ export class FullBooksDisplayComponent implements OnInit {
           if (err.status == 500) {
             this.toastService.show("Book already in cart.", { classname: 'bg-danger text-light', delay: 3000 })
           }
+          else{
+            this.toastService.show("error in cart.", { classname: 'bg-danger text-light', delay: 3000 })
+          }
         }
       )
   }
@@ -49,6 +52,9 @@ export class FullBooksDisplayComponent implements OnInit {
         (err: any) => {
           if (err.status == 500) {
             this.toastService.show("Book already in wishlist.", { classname: 'bg-danger text-light', delay: 3000 })
+          }
+          else{
+            this.toastService.show("error in wishlist.", { classname: 'bg-danger text-light', delay: 3000 })
           }
         }
       )

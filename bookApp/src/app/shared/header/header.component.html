@@ -80,15 +80,42 @@
 			<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			{{name}}
 			</button>
-			<div class="dropdown-menu categorylist" style="color:white;background-color:chocolate;">
-			<a class="dropdown-item" href="#">Profile</a>
+
+
+			<div *ngIf="UserLoggedIn" class="dropdown-menu categorylist" style="color:white;background-color:chocolate;">
+			<a class="dropdown-item" href="#" routerLink='user/profile'>Profile</a>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="#">My WishList</a>
+			<a class="dropdown-item" href="#" routerLink='user/wishlist'>WishList</a>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="#">My Cart</a>
+			<a class="dropdown-item" href="#" routerLink='user/cart'>Cart</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#" routerLink='user/orders'>Orders</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#" routerLink='user/book-submit'>Submit Books</a>
 			<div class="dropdown-divider"></div>
 			<a class="dropdown-item" href="#" (click)="logout()">Logout</a>
 			</div>
+
+			<div *ngIf="AdminLoggedIn" class="dropdown-menu categorylist" style="color:white;background-color:chocolate;">
+				<a class="dropdown-item" href="#" routerLink='user/profile'>Profile</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" routerLink='/book'>Books</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" routerLink='/coupon'>Coupon</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" routerLink='admin/orders/viewOrders'>Orders</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" routerLink='admin/category/view'>Category</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" routerLink='admin/bookSubmission/View'>Book Submission</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" routerLink='admin/userStatus'>User Status</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+				</div>
+
+
+
 		</div>
 
 <!-------------------------------------------------------------------------->
