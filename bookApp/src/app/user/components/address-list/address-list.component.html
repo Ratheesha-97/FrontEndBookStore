@@ -1,7 +1,7 @@
 <div class="container row mt-3">
 
   <div class="col-4" *ngFor="let address of addresses; let i = index">
-    <div class="card mx-1 my-2 " [ngClass]="{'border-3 border-primary': selectedAddress == address.AId}">
+    <div class="card mx-1 my-2 " [ngClass]="{'border-3 border-secondary': selectedAddress == address.AId}">
       <!-- <div class="card mx-1 my-2"  [ngClass]="{'text-white bg-primary': address.Selected}"> -->
       <!-- <div class="card-header text-white bg-dark" *ngIf="selectedAddress == address.AId">Delivering here.</div> -->
       <div class="card-body">
@@ -17,14 +17,13 @@
           {{address.PhoneNo}}
           <br>
         </p>
-        <div class="row">
+        <div class="row mx-1">
           <button class="btn btn-secondary" (click)="selectAddress(address.AId)"
             [disabled]="selectedAddress == address.AId">Deliver to this address</button>
         </div>
-        <div class="row mt-1">
-          <button class="btn btn-secondary col-5" (click)="editAddress(address.AId)"  data-bs-toggle="modal" [attr.data-bs-target]="'#Modal'+address.AId">Edit</button>
-          <div class="col-2"></div>
-          <button class="btn btn-secondary col-5" (click)="deleteAddress(address.AId)">Delete</button>
+        <div class="row mt-1 mx-1">
+          <button class="btn btn-outline-secondary col-5" (click)="editAddress(address.AId)"  data-bs-toggle="modal" [attr.data-bs-target]="'#Modal'+address.AId">Edit</button>
+          <button class="btn btn-outline-secondary col-5 offset-2" (click)="deleteAddress(address.AId)">Delete</button>
         </div>
       </div>
     </div>
@@ -50,7 +49,7 @@
   <div class="col-4">
     <div class="card container mx-1 my-2 justify-content-center" style="height: 100%;">
 
-      <a routerLink="/user/address-create" class="btn btn-primary stretched-link">Add new address.</a>
+      <a routerLink="/user/address-create" class="btn btn-outline-secondary stretched-link">Add new address.</a>
       <!-- <div class="card mx-1 my-2"  [ngClass]="{'text-white bg-primary': address.Selected}"> -->
       <!-- <div class="card-header text-white bg-dark" *ngIf="selectedAddress == address.AId">Delivering here.</div> -->
       <!-- <div class="card-body"> -->

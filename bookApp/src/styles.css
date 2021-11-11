@@ -14,3 +14,22 @@
     opacity: 100;
     margin-left: 0;
   }
+
+  .btn-secondary {
+    background-color: #784400;
+    border-color: #784400;
+  }
+
+  .btn-secondary:hover {
+    background-color: #a55d00;
+    border-color: #a55d00;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: #784400;
+    border-color: #784400;
+  }
+
+  .border-secondary {
+    border-color: #784400!important;
+}
