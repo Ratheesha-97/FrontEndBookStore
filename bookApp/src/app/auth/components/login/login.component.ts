@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServicesService } from '../../auth-services.service';
 
 @Component({
@@ -36,11 +37,14 @@ export class LoginComponent implements OnInit {
             console.log("CartId:", res.body.CartId);
             
             sessionStorage.setItem("UserId", res.body.UId);
+            sessionStorage.setItem("UserName", res.body.UserName);
             sessionStorage.setItem("CartId", res.body.CartId);
             sessionStorage.setItem("UserToken", res.body.UId);
             sessionStorage.removeItem("AdminToken");
           }
-          
+           
+          //this.router.navigateByUrl();
+          window.location.replace('/home');
         },
 
         (error: any) => {
@@ -57,7 +61,7 @@ export class LoginComponent implements OnInit {
           }
           else
             {
-              this.errorMessage = "Server Errro";
+              this.errorMessage = "Server Error";
           
             }
         })
@@ -65,7 +69,7 @@ export class LoginComponent implements OnInit {
    
   }
 
-  constructor(private authService: AuthServicesService) { }
+  constructor(private authService: AuthServicesService,private router:Router) { }
 
   ngOnInit(): void {
   }

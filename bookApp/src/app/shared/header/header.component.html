@@ -53,52 +53,52 @@
 
 				</div>
 			</div>
+			<div>
 			<input class="form-control mr-sm-2" type="search" placeholder="Search books here" aria-label="Search"
 				[(ngModel)]="searchText" name="second">
-			<button (click)="SearchByFilter()" class="btn btn-outline-success my-2 my-sm-0" type="submit"
-				style="background-color: cornsilk;">Search</button>
+			<button (click)="SearchByFilter()" class="btn " type="submit"
+				style="background-color: cornsilk;margin-left: -11px;">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+				  </svg>
+			</button>
+		</div>
 
 
 		</form>
-		<!--------------------
-  
+		
 
-  <span id="searchDropdownDescription" class="nav-progressive-attribute" style="display:none">Select the department you want to search in</span>
-              <select  [(ngModel)]="optionSelected" aria-describedby="searchDropdownDescription" class="form-control nav-search-dropdown searchSelect nav-progressive-attrubute nav-progressive-search-dropdown" data-nav-digest="MvAeSAb2Gf8U4X6ovKacm46abKY=" data-nav-selected="0" id="searchDropdownBox" name="url" style="display: block; top: 2.5px;width:125px;height:38px;border-top-left-radius:0.25rem;border-bottom-left-radius:0.25rem" tabindex="0" title="Search in">
-                  <option [value]="All categories" selected="selected" value="search-alias=aps">All Categories</option>
-                  <option value="search-alias=todays-deals">Title</option>
-                  <option value="search-alias=alexa-skills">Author</option>
-                  <option value="search-alias=amazon-devices">ISBN</option>
-   
-              </select>
-  
-
-
-  ---------------------->
 
 
 		<div>
-			<a style="margin:6px;background-color: cornsilk;" class="btn" href="#" routerLink="/auth/login"
+			<a *ngIf="!loggedin" style="margin:6px;background-color: cornsilk;" class="btn" href="#" routerLink="/auth/login"
 				role="button">LoginIn</a>
-			<a style="margin-right:9px;background-color: cornsilk;" class="btn" href="#" routerLink="/auth/signin"
+
+<!--------------------dropdown for logged in user--------------------------->
+            
+		<div *ngIf="loggedin" class="btn-group" style="margin-left:14px;background-color: cornsilk;border-radius: 3px;">
+			<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{{name}}
+			</button>
+			<div class="dropdown-menu categorylist" style="color:white;background-color:chocolate;">
+			<a class="dropdown-item" href="#">Profile</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">My WishList</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">My Cart</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+			</div>
+		</div>
+
+<!-------------------------------------------------------------------------->
+
+			<a *ngIf="!loggedin" style="margin-right:9px;background-color: cornsilk;" class="btn" href="#" routerLink="/auth/signin"
 				role="button">SignUp</a>
 		</div>
 
         
-		<button type="button" routerLink ="/user/wishlist" class="btn btn-secondary" style="background-color: peru;">
-			<img src="http://icons.iconarchive.com/icons/iconsmind/outline/512/Heart-2-icon.png" width="16" height="16" class="bi bi-cart"
-				>			
-			
-		</button>
-		<button type="button" routerLink ="/user/cart" class="btn btn-secondary" style="background-color: peru;margin-left: 5px;">
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-cart"
-				viewBox="0 0 16 16">
-				<path
-					d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
-				</path>
-			</svg>
-			Cart
-		</button>
+		
 
 		
 		
